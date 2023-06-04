@@ -1,0 +1,39 @@
+nav {
+    padding: 0px 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left-nav,
+    .right-nav {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .left-nav {
+        gap: 0px;
+
+        p {
+            margin: 0;
+            font-weight: 500;
+            color: #9381ff;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    a {
+        color: #333;
+    }
+
+
+
+    .active-route {
+        color: #9381ff;
+        font-weight: 500;
+    }
+}

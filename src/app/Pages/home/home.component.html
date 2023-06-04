@@ -1,0 +1,113 @@
+<main>
+  <div class="units">
+    <mat-button-toggle-group
+      [value]="temperatureUnits$ | async"
+      (change)="unitChange($event)"
+    >
+      <mat-button-toggle value="C">C</mat-button-toggle>
+      <mat-button-toggle value="F">F</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="input-wrapper">
+    <input
+      type="text"
+      [formControl]="searchQuery"
+      placeholder="Search for a City"
+    />
+    <ul *ngIf="searchResults && !loading">
+      <li
+        *ngFor="let result of searchResults"
+        (click)="onLocationSelected(result)"
+      >
+        {{ result.LocalizedName }}, {{ result.Country.LocalizedName }}
+      </li>
+      <li *ngIf="!loading && searchResults.length === 0 && searchQuery.value">
+        No results found
+      </li>
+    </ul>
+    <ul *ngIf="loading">
+      <li>Loading...</li>
+    </ul>
+    <div style="text-align: center; color: red;" *ngIf="showNonEnglishMessage">
+      Only English characters are allowed.
+    </div>
+  </div>
+  <div class="weather-data-wrapper" *ngIf="weatherData">
+    <div style="margin-bottom: 20px">
+      <div class="title-wrapper">
+        <h2>
+          Current Weather in
+          <span class="localized-name"
+            >{{ weatherData?.location?.LocalizedName }}
+          </span>
+        </h2>
+
+        <button
+          class="heart-icon"
+          mat-icon-button
+          [ngClass]="{
+            'red-color': isFavorite(weatherData?.location.Key),
+            'gray-color': !isFavorite(weatherData?.location.Key)
+          }"
+          (click)="toggleFavorite(weatherData?.location)"
+        >
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </div>
+      <div class="card card-current-weather">
+        <img
+          width="40"
+          alt="Angular Logo"
+          src="https://www.accuweather.com/images/weathericons/{{
+            setIcon(weatherData.currentWeather?.WeatherIcon)
+          }}.svg"
+        />
+        <p>{{ weatherData.currentWeather?.WeatherText }}</p>
+        <p>{{ weatherData.currentWeather?.LocalObservationDateTime | date }}</p>
+        <ng-container *ngIf="temperatureUnits$ | async as unit">
+            <p *ngIf="unit === 'C'" >
+                {{weatherData.currentWeather?.Temperature?.Metric?.Value}}°C</p>
+            <p *ngIf="unit === 'F'" >
+                {{weatherData.currentWeather?.Temperature?.Imperial?.Value}}°F
+            </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <h2 style="text-align: center">5 Day Forecast</h2>
+    <div class="five-days-wrapper">
+      <div class="card" *ngFor="let forecast of weatherData.forecast">
+        <img
+          width="40"
+          alt="Angular Logo"
+          src="https://www.accuweather.com/images/weathericons/{{
+            setIcon(forecast.Day.Icon)
+          }}.svg"
+        />
+
+        <p>{{ forecast.Date | date }}</p>
+
+          <div class="temp-wrapper" *ngIf="temperatureUnits$ | async as unit">
+            <span>Max: </span>
+            <p *ngIf="unit === 'C'">
+              {{ forecast.Temperature.Maximum.Value | unitPipe }}°C
+            </p>
+            <p *ngIf="unit === 'F'">
+              {{ forecast.Temperature.Maximum.Value }}°F
+            </p>
+          </div>
+
+          <div class="temp-wrapper" *ngIf="temperatureUnits$ | async as unit">
+            <span>Min: </span>
+            <p *ngIf="unit === 'C'" class="subtext">
+              {{ forecast.Temperature.Minimum.Value | unitPipe }}°C
+            </p>
+            <p *ngIf="unit === 'F'" class="subtext">
+              {{ forecast.Temperature.Minimum.Value }}°F
+            </p>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,37 @@
+<section class="main-container">
+  <h2 *ngIf="favorites.length > 0">Favorites</h2>
+  <div *ngIf="favorites.length > 0; else noFavorites" class="favorite-wrapper">
+    <div
+      class="card-favorite"
+      *ngFor="let favorite of favorites"
+      (click)="navigateToLocation(favorite.Key)"
+    >
+      <button
+      class="delete-icon"
+        mat-fab
+        color="primary"
+        aria-label="Example icon button with a delete icon"
+        (click)="removeFromFavorites(favorite.Key)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+      <img
+        width="40"
+        alt="Angular Logo"
+        src="https://www.accuweather.com/images/weathericons/{{
+          setIcon(favorite.currentWeather.WeatherIcon)
+        }}.svg"
+      />
+      <p style="font-weight: 500">{{ favorite.EnglishName }}</p>
+      <p>{{ favorite.currentWeather.WeatherText }}</p>
+      <p>{{ favorite.currentWeather.LocalObservationDateTime | date }}</p>
+      <p>{{ favorite.currentWeather.Temperature?.Metric?.Value }}°C</p>
+    </div>
+  </div>
+  <ng-template #noFavorites class="empty-favorites">
+    <div class="empty-favorites">
+      <h2>No Favorites yet</h2>
+      <img src="../../../assets/undraw_season_change.svg" alt="SVG Image" />
+    </div>
+  </ng-template>
+</section>
