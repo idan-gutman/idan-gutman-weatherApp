@@ -19,10 +19,8 @@ export class FavoritesComponent implements OnInit {
     this.favoritesService.favorites$.subscribe((favorites) => {
       this.favorites = favorites;
     });
-    console.log(this.favorites);
-    
   }
-  removeFromFavorites(locationKey: any) {
+    removeFromFavorites(locationKey: any) {
     this.favoritesService.removeFromFavorites(locationKey);
   }
 

@@ -7,14 +7,11 @@ import { Location } from '../models';
   providedIn: 'root',
 })
 export class WeatherService {
-  // private apiKey = 'LKBuJVsuyhelk8ZQJ1Zp9juM5ynNP2rw';
-  // private apiKey = 'qsnB5QqSeIkrgrRI36aARoA0OsLlU7g1';
-  private apiKey = 'U3eaSjL3GFOHCpgtyi6uNiy0PoyAGQnb';
+  private apiKey = 'qsnB5QqSeIkrgrRI36aARoA0OsLlU7g1';
   private baseUrl = 'https://dataservice.accuweather.com/';
 
   constructor(private http: HttpClient) {}
 
-  // Method to fetch search suggestions for the search field
   getLocationAutocomplete(query: string): Observable<any> {
     const endpoint = `locations/v1/cities/autocomplete`;
     const params = `?apikey=${this.apiKey}&q=${query}`;

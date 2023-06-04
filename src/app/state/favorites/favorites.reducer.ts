@@ -73,5 +73,6 @@ export const favoritesReducer = createReducer(
     favorites: state.favorites.filter(
       (favorite) => favorite.Key !== locationKey
     ),
-  }))
+  })),
+  on(FavoritesActions.loadFavoritesFromStorage, state => state),
 );

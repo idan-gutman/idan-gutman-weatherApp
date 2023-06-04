@@ -68,52 +68,6 @@ main {
         }
     }
 
-    .input-wrapper {
-        display: flex;
-        flex-direction: column;
-        text-align: initial;
-        align-items: center;
-        position: relative;
-
-        input {
-            min-width: 240px;
-            border: 1px solid #9381ff;
-            border-radius: 65px;
-            padding: 10px 20px;
-            background-color: inherit;
-
-            &:focus {
-                outline: none;
-            }
-
-            :-webkit-autofill:active {
-                background-color: #f5f6ff !important;
-            }
-        }
-
-        ul {
-            list-style-type: none;
-            margin-inline-start: 0px;
-            position: absolute;
-            top: 28px;
-            z-index: 3;
-            background-color: #9381ff;
-            padding: 10px;
-            color: white;
-            font-weight: 400;
-            border-radius: 20px;
-
-            li {
-                &:hover {
-                    background-color: #fde2f0;
-                    color: black;
-                    border-radius: 5px;
-                    cursor: pointer;
-                }
-            }
-        }
-    }
-
     .five-days-wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -167,4 +121,10 @@ main {
 
 .gray-color {
     color: gray;
+}
+.mat-spinner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
 }

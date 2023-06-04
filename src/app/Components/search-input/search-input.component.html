@@ -1,0 +1,20 @@
+<div class="input-wrapper">
+    <input type="text" [formControl]="searchQuery" placeholder="Search for a City" />
+    <ul *ngIf="searchResults && !loading">
+      <li *ngFor="let result of searchResults" (click)="onLocationSelected(result)">
+        {{ result.LocalizedName }}, {{ result.Country.LocalizedName }}
+      </li>
+      <li *ngIf="!loading && searchResults.length === 0 && searchQuery.value">
+        No results found
+      </li>
+    </ul>
+    <ul *ngIf="searchQuery.value && errorMessage" style="background-color: red">
+      <li>Something went wrong</li>
+    </ul>
+    <ul *ngIf="loading && !errorMessage">
+      <li>Loading...</li>
+    </ul>
+    <div style="text-align: center; color: red" *ngIf="showNonEnglishMessage">
+      Only English characters are allowed.
+    </div>
+  </div>

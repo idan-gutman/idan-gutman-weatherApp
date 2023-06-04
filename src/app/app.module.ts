@@ -16,13 +16,19 @@ import { favoritesReducer } from './state/favorites/favorites.reducer';
 import { appReducer } from './state/app/app.reducer';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CoreModule } from 'src/core/core.module';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './Components/dialog/dialog.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SearchInputComponent } from './Components/search-input/search-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    DialogComponent,
+    SearchInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +41,8 @@ import { CoreModule } from 'src/core/core.module';
     MatButtonModule,
     MatButtonToggleModule,
     CoreModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
     StoreModule.forRoot({ favorites: favoritesReducer,  app:appReducer}),
   ],
   providers: [HttpClientModule],
